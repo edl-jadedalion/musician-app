@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: dist/musician-app
+  - source: dist/edltestartifact
     destination: /var/www/musician-app
 permissions:
   - object: /var/www/musician-app
