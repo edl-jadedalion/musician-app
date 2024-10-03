@@ -3,18 +3,23 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 20
+      nodejs: 16  # Ensure the Node.js version aligns with your project requirements
     commands:
-      - node -v
-      - npm -v
+      - echo "Installing dependencies"
+      - npm install --legacy-peer-deps  # Resolves potential dependency conflicts
 
   build:
     commands:
-      - npm install --legacy-peer-deps
-      - npm run build
+      - echo "Building React frontend"
+      - npm run build > build_output.log 2>&1 || (cat build_output.log; exit 1)  # Build React and log output
+      - ls -la build/  # Check if the build folder was generated (default for create-react-app)
+
+  post_build:
+    commands:
+      - echo "Node.js/React build completed"
 
 artifacts:
   files:
-    - 'build/**/*'
-    - appspec.yml
-    - 'deploy-scripts/**/*'
+    - 'build/**/*'  # React's default build output directory for static files
+    - appspec.yml    # If you are using AWS CodeDeploy
+    - 'deploy-scripts/**/*'  # Include deployment scripts if any
