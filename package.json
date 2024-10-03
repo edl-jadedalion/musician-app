@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon app.js",
-    "start-dev": "nodemon app.js"
+    "start-dev": "nodemon app.js",
+    "build": "cd client && npm install && npm run build"  // Add this line for React build
   },
   "author": "Jonathan Spruance",
   "license": "ISC",
