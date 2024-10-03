@@ -1,20 +1,26 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
       nodejs: 20
     commands:
       - npm install -g @angular/cli@17
+
   pre_build:
     commands:
       - npm install
+
   build:
     commands:
       - ng build -c production
-    finally:
-      - echo 'Final Block execution!'
+
+  post_build:
+    commands:
+      - echo 'Build completed successfully!'
+      
 artifacts:
   files:
-    - 'dist/edltestartifact/**/*'
+    - 'dist/WebTestArtifact/**/*'  # Ensure this path is correct after the Angular build
     - appspec.yml
     - 'deploy-scripts/**/*'
