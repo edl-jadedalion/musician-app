@@ -3,24 +3,18 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16  # Use Node.js 16 for better Angular compatibility
+      nodejs: 20
     commands:
-      - npm install -g @angular/cli@17
-
-  pre_build:
-    commands:
-      - npm ci  # Clean install to avoid dependency conflicts
+      - node -v
+      - npm -v
 
   build:
     commands:
-      - ng build -c production
-
-  post_build:
-    commands:
-      - echo 'Build completed successfully!'
+      - npm install --legacy-peer-deps
+      - npm run build
 
 artifacts:
   files:
-    - 'dist/edltestartifact/**/*'
+    - 'build/**/*'
     - appspec.yml
     - 'deploy-scripts/**/*'
