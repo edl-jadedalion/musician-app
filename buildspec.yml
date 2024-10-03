@@ -13,14 +13,14 @@ phases:
 
   build:
     commands:
-      - ng build -c production
+      - node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build -c production
 
   post_build:
     commands:
       - echo 'Build completed successfully!'
-      
+
 artifacts:
   files:
-    - 'dist/WebTestArtifact/**/*'  # Ensure this path is correct after the Angular build
+    - 'dist/edltestartifact/**/*'
     - appspec.yml
     - 'deploy-scripts/**/*'
