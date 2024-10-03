@@ -3,17 +3,17 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 20
+      nodejs: 16  # Use Node.js 16 for better Angular compatibility
     commands:
       - npm install -g @angular/cli@17
 
   pre_build:
     commands:
-      - npm install
+      - npm ci  # Clean install to avoid dependency conflicts
 
   build:
     commands:
-      - node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build -c production
+      - ng build -c production
 
   post_build:
     commands:
