@@ -5,22 +5,16 @@ phases:
     runtime-versions:
       nodejs: 20
     commands:
-      - npm install -g @angular/cli@17
-
-  pre_build:
-    commands:
-      - npm install
+      - node -v
+      - npm -v
 
   build:
     commands:
-      - ng build -c production
+      - npm install --legacy-peer-deps
+      - npm run build
 
-  post_build:
-    commands:
-      - echo 'Build completed successfully!'
-      
 artifacts:
   files:
-    - 'dist/edltestartifact/**/*'  # Ensure this path is correct after the Angular build
+    - 'build/**/*'
     - appspec.yml
     - 'deploy-scripts/**/*'
