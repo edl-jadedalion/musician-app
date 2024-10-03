@@ -3,16 +3,19 @@ os: linux
 files:
   - source: dist/edltestartifact
     destination: /var/www/musician-app
+
 permissions:
   - object: /var/www/musician-app
     pattern: '**'
     mode: '0755'
-    owner: root
-    group: root
+    owner: root         # Verify if you need to change this to a different user (e.g., www-data)
+    group: root         # Verify if this needs to match your web server user group
     type:
       - file
       - directory
+
 hooks:
   ApplicationStart:
     - location: deploy-scripts/app-start-hook.sh
-      timeout: 300  
+      timeout: 300
+      runas: root       # Ensure this script is allowed to run as root or adjust accordingly
